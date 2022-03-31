@@ -1,0 +1,47 @@
+Q1. Imagine, we have an arbitrary object obj, created by a constructor function – we don’t know which one, but we’d like to create a new object using it.
+Can we do it like that?
+let obj2 = new obj.constructor();
+Give an example of a constructor function for obj which lets such code work right. And an example that makes it work wrong.
+
+    Sol:
+function User(name) {
+  this.name = name;
+}
+
+let user = new User('John');
+let user2 = new user.constructor('Pete');
+
+alert( user2.name ); 
+
+
+
+Q2. Add to the prototype of all functions the method defer(ms), that runs the function after ms milliseconds.
+
+    Sol:
+Function.prototype.defer = function(ms) {
+  setTimeout(this, ms);
+};
+
+function f() {
+  alert("Hello!");
+}
+
+f.defer(1000);
+
+
+
+Q3. Add to the prototype of all functions the method defer(ms), that returns a wrapper, delaying the call by ms milliseconds.
+
+    Sol:
+Function.prototype.defer = function(ms) {
+  let f = this;
+  return function(...args) {
+    setTimeout(() => f.apply(this, args), ms);
+  }
+};
+
+function f(a, b) {
+  alert( a + b );
+}
+
+f.defer(1000)(1, 2);
