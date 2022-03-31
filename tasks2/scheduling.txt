@@ -1,0 +1,59 @@
+Q1. Write a function printNumbers(from, to) that outputs a number every second, starting from from and ending with to.
+Make two variants of the solution.
+i) Using setInterval.
+ii) Using nested setTimeout.
+    Sol:
+i) 
+function printNumbers(from, to) {
+  let current = from;
+
+  let timerId = setInterval(function() {
+    alert(current);
+    if (current == to) {
+      clearInterval(timerId);
+    }
+    current++;
+  }, 1000);
+}
+
+printNumbers(5, 10);
+
+ii) 
+function printNumbers(from, to) {
+  let current = from;
+
+  setTimeout(function go() {
+    alert(current);
+    if (current < to) {
+      setTimeout(go, 1000);
+    }
+    current++;
+  }, 1000);
+}
+
+printNumbers(5, 10);
+
+
+
+
+Q2. In the code below there’s a setTimeout call scheduled, then a heavy calculation is run, that takes more than 100ms to finish.
+When will the scheduled function run?
+i) After the loop.
+ii) Before the loop.
+iii) In the beginning of the loop.
+What is alert going to show?
+let i = 0;
+setTimeout(() => alert(i), 100); // ?
+// assume that the time to execute this function is >100ms
+for(let j = 0; j < 100000000; j++) {
+  i++;
+}
+    Sol:
+It will run only after the current code has finished
+
+let i = 0;
+setTimeout(() => alert(i), 100);
+for(let j = 0; j < 100000000; j++) {
+  i++;
+}
+
