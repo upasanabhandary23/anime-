@@ -1,0 +1,213 @@
+Q1. The function sayHi uses an external variable name. When the function runs, which value is it going to use?
+let name = "John";
+function sayHi() {
+  alert("Hi, " + name);
+}
+name = "Pete";
+sayHi(); // what will it show: "John" or "Pete"?
+Such situations are common both in browser and server-side development. A function may be scheduled to execute later than it is created, for instance after a user action or a network request.
+So, the question is: does it pick up the latest changes?
+    Sol:
+Pete
+
+
+
+Q2. The function makeWorker below makes another function and returns it. That new function can be called from somewhere else.
+Will it have access to the outer variables from its creation place, or the invocation place, or both?
+function makeWorker() {
+  let name = "Pete";
+
+  return function() {
+    alert(name);
+  };
+}
+let name = "John";
+// create a function
+let work = makeWorker();
+// call it
+work(); // what will it show?
+Which value it will show? “Pete” or “John?
+    Sol:
+Pete
+
+
+
+Q3. Here we make two counters: counter and counter2 using the same makeCounter function.
+Are they independent? What is the second counter going to show? 0,1 or 2,3 or something else?
+function makeCounter() {
+  let count = 0;
+
+  return function() {
+    return count++;
+  };
+}
+let counter = makeCounter();
+let counter2 = makeCounter();
+alert( counter() ); 
+alert( counter() ); 
+alert( counter2() ); 
+alert( counter2() ); 
+    Sol:
+0, 1
+
+
+
+Q4. Here a counter object is made with the help of the constructor function.
+Will it work? What will it show?
+function Counter() {
+  let count = 0;
+
+  this.up = function() {
+    return ++count;
+  };
+  this.down = function() {
+    return --count;
+  };
+}
+let counter = new Counter();
+alert( counter.up() ); 
+alert( counter.up() ); 
+alert( counter.down() ); 
+    Sol:
+It will WORK.
+It will show 
+1, 2, 1
+
+
+
+Q5. ook at the code. What will be the result of the call at the last line?
+let phrase = "Hello";
+if (true) {
+  let user = "John";
+
+  function sayHi() {
+    alert(`${phrase}, ${user}`);
+  }
+}
+sayHi();
+    Sol:
+It is an ERROR
+
+
+
+Q6. Write function sum that works like this: sum(a)(b) = a+b.
+    Sol:
+function sum(a) {
+
+  return function(b) {
+    return a + b; // takes "a" from the outer lexical environment
+  };
+
+}
+
+alert( sum(1)(2) ); 
+alert( sum(5)(-1) ); 
+
+
+
+Q7. What will be the result of this code?
+let x = 1;
+function func() {
+  console.log(x); // ?
+
+  let x = 2;
+}
+func();
+    Sol:
+It is an ERROR
+
+
+
+Q8. We have a built-in method arr.filter(f) for arrays. It filters all elements through the function f. If it returns true, then that element is returned in the resulting array.
+Make a set of “ready to use” filters:
+i) inBetween(a, b) – between a and b or equal to them (inclusively).
+ii) inArray([...]) – in the given array.
+The usage must be like this:
+i) arr.filter(inBetween(3,6)) – selects only values between 3 and 6.
+ii) arr.filter(inArray([1,2,3])) – selects only elements matching with one of the members of [1,2,3].
+    Sol:
+i) In-Between :
+function inBetween(a, b) {
+  return function(x) {
+    return x >= a && x <= b;
+  };
+}
+let arr = [1, 2, 3, 4, 5, 6, 7];
+alert( arr.filter(inBetween(3, 6)) );
+
+ii) Array :
+function inArray(arr) {
+  return function(x) {
+    return arr.includes(x);
+  };
+}
+let arr = [1, 2, 3, 4, 5, 6, 7];
+alert( arr.filter(inArray([1, 2, 10])) );
+
+
+
+Q9. We’ve got an array of objects to sort:
+let users = [
+  { name: "John", age: 20, surname: "Johnson" },
+  { name: "Pete", age: 18, surname: "Peterson" },
+  { name: "Ann", age: 19, surname: "Hathaway" }
+];
+
+The usual way to do that would be:
+users.sort((a, b) => a.name > b.name ? 1 : -1);
+users.sort((a, b) => a.age > b.age ? 1 : -1);
+Can we make it even less verbose, like this?
+users.sort(byField('name'));
+users.sort(byField('age'));
+So, instead of writing a function, just put byField(fieldName).
+
+Write the function byField that can be used for that.
+    Sol:
+function byField(fieldName){
+  return (a, b) => a[fieldName] > b[fieldName] ? 1 : -1;
+}
+
+
+
+Q10. The following code creates an array of shooters.
+Every function is meant to output its number. But something is wrong…
+function makeArmy() {
+  let shooters = [];
+
+  let i = 0;
+  while (i < 10) {
+    let shooter = function() { // create a shooter function,
+      alert( i ); // that should show its number
+    };
+    shooters.push(shooter); // and add it to the array
+    i++;
+  }
+
+  // ...and return the array of shooters
+  return shooters;
+}
+let army = makeArmy();
+// all shooters show 10 instead of their numbers 0, 1, 2, 3...
+army[0](); // 10 from the shooter number 0
+army[1](); // 10 from the shooter number 1
+army[2](); // 10 ...and so on.
+
+Why do all of the shooters show the same value?
+    Sol:
+function makeArmy() {
+
+  let shooters = [];
+
+  for(let i = 0; i < 10; i++) {
+    let shooter = function() { // shooter function
+      alert( i ); // should show its number
+    };
+    shooters.push(shooter);
+  }
+
+  return shooters;
+}
+let army = makeArmy();
+army[0]();
+army[5](); 
+
