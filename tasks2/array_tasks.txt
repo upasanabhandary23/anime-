@@ -1,0 +1,234 @@
+Q1. Write the function camelize(str) that changes dash-separated words like “my-short-string” into camel-cased “myShortString”.
+    Sol:
+function camelize(str){
+    return str;
+    .split('-')
+    .map(
+        (word, index) => index == 0 ? word : word[0].toUpperCase() + word.slice(1)
+    )
+    .join('');
+}
+
+
+Q2. Write a function filterRange(arr, a, b) that gets an array arr, looks for elements with values higher or equal to a and lower or equal to b and return a result as an array.
+The function should not modify the array. It should return the new array.
+For instance:
+let arr = [5, 3, 8, 1];
+let filtered = filterRange(arr, 1, 4);
+alert( filtered );
+alert( arr ); 
+    Sol:
+function filterRange(arr, a, b){
+    return arr.filter(item => (a <= item && item <= b));
+}
+let arr = [5, 3, 8, 1];
+let filtered = filterRange(arr, 1, 4);
+alert(filtered);
+alert(arr);
+
+
+Q3. Write a function filterRangeInPlace(arr, a, b) that gets an array arr and removes from it all values except those that are between a and b. The test is: a ≤ arr[i] ≤ b.
+The function should only modify the array. It should not return anything.
+For instance:
+let arr = [5, 3, 8, 1];
+filterRangeInPlace(arr, 1, 4); 
+alert( arr ); 
+    Sol:
+function filterRangeInPlace(arr, a, b){
+    for(let i=0; i< arr.length; i++ ){
+        let val = arr[i];
+        if(val < a || val > b){
+            arr.splice(i, 1);
+            i--;
+        }
+    }
+}
+let arr = [5, 3, 8,1];
+filterRangeInPlace(arr, 1, 4);
+alert(arr);
+
+
+Q4. Sort in descending order:
+    Sol:
+let arr = [5, 2, 1, -10, 8];
+
+// ... your code to sort it in decreasing order
+arr.sort((a,b) => b-a);
+
+alert( arr );
+
+
+Q5. We have an array of strings arr. We’d like to have a sorted copy of it, but keep arr unmodified.
+Create a function copySorted(arr) that returns such a copy.
+let arr = ["HTML", "JavaScript", "CSS"];
+let sorted = copySorted(arr);
+alert( sorted );
+alert( arr ); 
+    Sol:
+function copySorted(arr){
+    return arr.splice().sort();
+}
+let arr = ["HTML", "JavaScript", "CSS"];
+let sorted = copySorted(arr);
+alert( sorted );
+alert( arr ); 
+
+
+Q6. Create a constructor function Calculator that creates “extendable” calculator objects.
+The task consists of two parts.
+First, implement the method calculate(str) that takes a string like "1 + 2" in the format “NUMBER operator NUMBER” (space-delimited) and returns the result. Should understand plus + and minus -.
+Usage example:
+1.)
+let calc = new Calculator;
+alert( calc.calculate("3 + 7") ); // 10
+2.)
+Then add the method addMethod(name, func) that teaches the calculator a new operation. It takes the operator name and the two-argument function func(a,b) that implements it.
+For instance, let’s add the multiplication *, division / and power **:
+
+let powerCalc = new Calculator;
+powerCalc.addMethod("*", (a, b) => a * b);
+powerCalc.addMethod("/", (a, b) => a / b);
+powerCalc.addMethod("**", (a, b) => a ** b);
+let result = powerCalc.calculate("2 ** 3");
+alert( result ); // 8
+    Sol:
+function Calculator() {
+
+  this.methods = {
+    "-": (a, b) => a - b,
+    "+": (a, b) => a + b
+  };
+
+  this.calculate = function(str) {
+
+    let split = str.split(' '),
+      a = +split[0],
+      op = split[1],
+      b = +split[2];
+
+    if (!this.methods[op] || isNaN(a) || isNaN(b)) {
+      return NaN;
+    }
+
+    return this.methods[op](a, b);
+  };
+
+  this.addMethod = function(name, func) {
+    this.methods[name] = func;
+  };
+}
+
+
+Q7. You have an array of user objects, each one has user.name. Write the code that converts it into an array of names.
+    Sol:
+let john = { name: "John", age: 25 };
+let pete = { name: "Pete", age: 30 };
+let mary = { name: "Mary", age: 28 };
+
+let users = [ john, pete, mary ];
+
+let names = /* ... your code */ users.map(item => item.name);
+
+alert( names ); 
+
+
+Q8. You have an array of user objects, each one has name, surname and id.
+Write the code to create another array from it, of objects with id and fullName, where fullName is generated from name and surname.
+    Sol:
+let john = { name: "John", surname: "Smith", id: 1 };
+let pete = { name: "Pete", surname: "Hunt", id: 2 };
+let mary = { name: "Mary", surname: "Key", id: 3 };
+
+let users = [ john, pete, mary ];
+
+let usersMapped = /* ... your code ... */ users.map(user => ({
+    fullName: '${user.name} ${user.surname}' , id: user.id
+}))
+
+/*
+usersMapped = [
+  { fullName: "John Smith", id: 1 },
+  { fullName: "Pete Hunt", id: 2 },
+  { fullName: "Mary Key", id: 3 }
+]
+*/
+
+alert( usersMapped[0].id ) 
+alert( usersMapped[0].fullName ) 
+
+
+Q9. Write the function sortByAge(users) that gets an array of objects with the age property and sorts them by age.
+    Sol:
+function sortByAge(arr){
+    arr.sort((a,b) => a.age - b.age);
+}
+let john = { name: "John", age: 25 };
+let pete = { name: "Pete", age: 30 };
+let mary = { name: "Mary", age: 28 };
+
+let arr = [ pete, john, mary ];
+
+sortByAge(arr);
+
+alert(arr[0].name);
+alert(arr[1].name);
+alert(arr[2].name);
+
+
+Q10. Write the function shuffle(array) that shuffles (randomly reorders) elements of the array.
+Multiple runs of shuffle may lead to different orders of elements.
+    Sol:
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+}
+let arr = [1, 2, 3];
+shuffle(arr);
+alert(arr);
+
+
+Q11. Write the function getAverageAge(users) that gets an array of objects with property age and returns the average age.
+The formula for the average is (age1 + age2 + ... + ageN) / N.
+    Sol:
+function getAverageAge(users) {
+  return users.reduce((prev, user) => prev + user.age, 0) / users.length;
+}
+
+let john = { name: "John", age: 25 };
+let pete = { name: "Pete", age: 30 };
+let mary = { name: "Mary", age: 29 };
+
+let arr = [ john, pete, mary ];
+
+alert( getAverageAge(arr) );
+
+
+Q12. Let arr be an array.
+Create a function unique(arr) that should return an array with unique items of arr.
+    Sol:
+function unique(arr) {
+  /* your code */
+  let result =[];
+  for(let str of arr){
+      if(!result.includes(str)){
+          result.push(str);
+      }
+  }
+  return result;
+}
+
+let strings = ["Hare", "Krishna", "Hare", "Krishna",
+  "Krishna", "Krishna", "Hare", "Hare", ":-O"
+];
+
+alert( unique(strings) );
+
+
+Q13. Let’s say we received an array of users in the form {id:..., name:..., age:... }.
+Create a function groupById(arr) that creates an object from it, with id as the key, and array items as values.
+    Sol:
+function groupById(array) {
+  return array.reduce((obj, value) => {
+    obj[value.id] = value;
+    return obj;
+  }, {})
+}
