@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window Co-ordinate of Field</title>
+    <link rel="stylesheet"  href="window_cordinate_field.css">
+    <script>
+        document.onclick = function(e) { 
+          coords.innerHTML = e.clientX + ':' + e.clientY;
+        };
+      </script>
+</head>
+<body>
+   Get window Co-ordinates by clicking anywhere
+  <br> Testing: To check the result produced by JavaScript.
+  <br>
+  <div id="coords">(click coordinates show up here)</div>
+
+
+  <div id="field">
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
+
+
+  <div class="triangle-right" style="left:-20px;top:-176px">1</div>
+  <div class="triangle-right" style="left:-10px;top:-178px">3</div>
+  <div class="triangle-right" style="left:190px;top:-40px">4</div>
+  <div class="triangle-right" style="left:200px;top:-42px">2</div>
+
+  <script>
+    let fieldCoords = field.getBoundingClientRect();
+
+    let answer = [
+      [ 
+        fieldCoords.left,
+        fieldCoords.top
+      ],
+      [ 
+        fieldCoords.right,
+        fieldCoords.bottom
+      ],
+      [ 
+        fieldCoords.left + field.clientLeft,
+        fieldCoords.top + field.clientTop
+      ],
+      [ 
+        fieldCoords.left + field.clientLeft + field.clientWidth,
+        fieldCoords.top + field.clientTop + field.clientHeight
+      ]
+    ];
+
+    alert(answer.join('  '));
+  </script>
+
+</body>
+</html>
