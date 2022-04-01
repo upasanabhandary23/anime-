@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Descendents</title>
+</head>
+<body>
+    <ul>
+        <li>Animals
+            <ul>
+                <li>Mammals
+                    <ul>
+                        <li>Cows</li>
+                        <li>Donkey</li>
+                        <li>Monkey</li>
+                        <li>Dogs</li>
+                    </ul>
+                </li>
+                <li>Other
+                    <ul>
+                        <li>Snakes</li>
+                        <li>Birds</li>
+                        <li>Cockroaches</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>Fishes
+            <ul>
+                <li>Aquarium
+                    <ul>
+                        <li>Goldfish</li>
+                        <li>Guppy</li>
+                    </ul>
+                </li>
+                <li>Sea
+                    <ul>
+                        <li>Sea Trout</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <script>
+        let lis = document.getElementsByTagName('li');
+
+        for(let li of lis){
+            let descendantCount = li.getElementsByTagName('li').length;
+            if(!descendantCount) continue;
+
+            li.firstChild.data += '[' + descendantCount + ']';
+        }
+    </script>
+</body>
+</html>
