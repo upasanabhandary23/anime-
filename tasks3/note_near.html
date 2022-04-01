@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Note near the element</title>
+    <link rel="stylesheet"  href="note_near.css">
+</head>
+<body>
+    <h1> </h1>
+
+    <p>
+        BTS (Korean: 방탄소년단; RR: Bangtan Sonyeondan), also known as the Bangtan Boys, is a South Korean boy band that was formed in 2010 and debuted in 2013 under Big Hit Entertainment.
+        The septet—consisting of members Jin, Suga, J-Hope, RM, Jimin, V, and Jungkook—co-writes and co-produces much of their own output.
+        Originally a hip hop group, their musical style has evolved to include a wide range of genres. 
+        Their lyrics, often focused on personal and social commentary, touch on the themes of mental health, troubles of school-age youth and coming of age, loss, the journey towards loving oneself, and individualism. 
+        Their work also often references literature and psychological concepts and includes an alternative universe storyline.
+    </p>
+
+    <blockquote>
+        Teacher: (With anger) Why you have not completed your homework?
+        Student: Sir, I had a critical headache yesterday after I left home from school.
+        Teacher: Do not lie to me.
+        Student: No, Sir, I am not lying.
+        Teacher: May I contact your parents and tell them about this?
+        Student: No, Sir. (students speak with low sound). Please dont say to my parents.
+        Teacher: Then, when will you do the homework properly?
+        Student: Sir, from now onwards I will finish it without any obstruct.
+        Teacher: if you have any difficulties regarding homework, ask me, and I will clarify your doubts.
+        Student: Ok sir, I will ask my doubts from now.
+        Teacher: And do not repeat this. Is it clear?
+        Student: Yes, Sir, I will not repeat this.
+    </blockquote>
+
+    <p>
+        BTS has been the recipient of many awards and honors, including 33 Mnet Asian Music Awards, 29 Melon Music Awards, 24 Golden Disc Awards, 20 Seoul Music Awards, six Korean Music Awards, 19 Gaon Chart Music Awards, nine Billboard Music Awards, six American Music Awards, and six MTV Video Music Awards. 
+        BTS is also the first group in history to win Top Song Sales Artist at the Billboard Music Awards and earn five consecutive wins for Top Social Artist.
+        Having sold over 32.7 million albums on the Gaon Music Chart,[335] BTS is the best-selling musical artist in South Korean history,[336][337] and hold five multi-Million albums and five Platinum streaming singles.
+        In the United States, BTS is the first Korean group to receive RIAA certification, and currently holds one Triple Platinum single, one Double Platinum single, three Platinum albums, three Platinum singles, three Gold singles, and one Gold album.
+        In Japan, BTS is the first male foreign artist to receive a Million certification for a single, and the only foreign artist to receive Diamond certification for a single; the group additionally has three multi-Platinum singles, two multi-Platinum albums, two Platinum albums, and six Gold albums in the country. 
+        In the United Kingdom, BTS is the first Korean group to receive BPI certification, and currently holds seven Silver singles, one Gold single,one Platinum single, five Silver album certifications, and three Gold album certifications.
+    </p>
+
+    <script>
+        function positionAt(anchor, position, elem) {
+
+            let anchorCoords = anchor.getBoundingClientRect();
+
+            switch (position) {
+                case "top":
+                elem.style.left = anchorCoords.left + "px";
+                elem.style.top = anchorCoords.top - elem.offsetHeight + "px";
+                break;
+
+                case "right":
+                elem.style.left = anchorCoords.left + anchor.offsetWidth + "px";
+                elem.style.top = anchorCoords.top + "px";
+                break;
+
+                case "bottom":
+                elem.style.left = anchorCoords.left + "px";
+                elem.style.top = anchorCoords.top + anchor.offsetHeight + "px";
+                break;
+            }
+
+        }
+
+        function showNote(anchor, position, html) {
+
+            let note = document.createElement('div');
+            note.className = "note";
+            note.innerHTML = html;
+            document.body.append(note);
+
+            positionAt(anchor, position, note);
+        }
+
+        let blockquote = document.querySelector('blockquote');
+
+        showNote(blockquote, "top", "note above");
+        showNote(blockquote, "right", "note at the right");
+        showNote(blockquote, "bottom", "note below");
+    </script>
+</body>
+</html>
