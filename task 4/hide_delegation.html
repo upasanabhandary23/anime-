@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hide Messages using Event Delegation</title>
+    <link rel="stylesheet"  href="hide_delegation.css">
+</head>
+<body>
+    <div id="container">
+        <div class="pane">
+            <h3>Bruno Mars</h3>
+            <p>
+                Peter Gene Hernandez (born October 8, 1985), known professionally as Bruno Mars, is an American singer, songwriter, record producer, musician, and dancer. 
+                He is known for his stage performances, retro showmanship, and for performing in a wide range of musical styles, including pop, R&B, funk, soul, reggae, disco, and rock.
+                Mars is accompanied by his band, the Hooligans, who play a variety of instruments, such as electric guitar, bass, piano, keyboards, drums, and horns, and also serve as backup singers and dancers.
+            </p>
+            <button class="remove-button">[x]</button>
+        </div>
+        <div class="pane">
+            <h3>Lil Nas X</h3>
+            <p>
+                Montero Lamar Hill (born April 9, 1999), known by his stage name Lil Nas , is an American rapper and singer. 
+                He rose to prominence with the release of his country rap single "Old Town Road", which first achieved viral popularity in early 2019 before climbing music charts internationally and becoming diamond certified by November of that same year
+                "Old Town Road" spent 19 weeks atop the US Billboard Hot 100 chart, becoming the longest-running number-one song since the chart debuted in 1958. 
+                Several remixes of the song were released, the most popular of which featured country singer Billy Ray Cyrus. 
+                Lil Nas X came out as gay while "Old Town Road" was atop the Hot 100, becoming the only artist to do so while having a number-one record.
+            </p>
+            <button class="remove-button">[x]</button>
+        </div>
+        <div class="pane">
+            <h3>Ariana Grande</h3>
+            <p>
+                Ariana Grande-Butera (born June 26, 1993) is an American singer, songwriter, and actress. 
+                Her four-octave vocal range has received public acclaim, and her personal life has been the subject of widespread media attention. 
+                She has received numerous accolades throughout her career, including two Grammy Awards, one Brit Award, one Bambi Award, two Billboard Music Awards, three American Music Awards, nine MTV Video Music Awards, and 26 Guinness World Records.
+                Grande began her music career at age 15 in the 2008 Broadway musical 13. 
+                She rose to fame for playing Cat Valentine in the Nickelodeon television series Victorious (2010–2013) and Sam & Cat (2013–2014). 
+                Grande signed with Republic Records in 2011 after label executives viewed YouTube videos of her covering songs. Her 1950s doo-wop-influenced pop and R&B debut album, Yours Truly (2013), topped the US Billboard 200, while its lead single, "The Way", reached the top ten of the US Billboard Hot 100. 
+                Grande's voice and whistle register on the album drew immediate comparisons to Mariah Carey.
+            </p>
+            <button class="remove-button">[x]</button>
+        </div>
+    </div>
+
+    <script>
+        container.onclick = function(event){
+            if(event.target.className != 'remove-button') return ;
+            let pane = event.target.closest('.pane');
+            pane.remove();
+        };
+    </script>
+</body>
+</html>
