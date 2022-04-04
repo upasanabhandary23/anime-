@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sortable Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid rgb(0, 32, 37);
+            padding: 4px;
+        }
+        th {
+            cursor: pointer;
+        }
+        th:hover {
+            background: rgb(220, 241, 97);
+        }
+  </style>
+</head>
+
+<body>
+
+  <table id="grid">
+    <thead>
+      <tr>
+        <th data-type="number">Age</th>
+        <th data-type="string">Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>21</td>
+        <td>Upasana</td>
+      </tr>
+      <tr>
+        <td>23</td>
+        <td>Soumick</td>
+      </tr>
+      <tr>
+        <td>22</td>
+        <td>Upendra</td>
+      </tr>
+      <tr>
+        <td>20</td>
+        <td>Rashmi</td>
+      </tr>
+      <tr>
+        <td>20</td>
+        <td>Nandini</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+
+    grid.onclick = function(e) {
+      if (e.target.tagName != 'TH') return;
+
+      let th = e.target;
+      
+      sortGrid(th.cellIndex, th.dataset.type);
+    };
+
+    function sortGrid(colNum, type) {
+      let tbody = grid.querySelector('tbody');
+
+      let rowsArray = Array.from(tbody.rows);
+
+      let compare;
+
+      switch (type) {
+        case 'number':
+          compare = function(rowA, rowB) {
+            return rowA.cells[colNum].innerHTML - rowB.cells[colNum].innerHTML;
+          };
+          break;
+        case 'string':
+          compare = function(rowA, rowB) {
+            return rowA.cells[colNum].innerHTML > rowB.cells[colNum].innerHTML ? 1 : -1;
+          };
+          break;
+      }
+
+      rowsArray.sort(compare);
+
+      tbody.append(...rowsArray);
+    }
+  </script>
+
+</body>
+</html>
