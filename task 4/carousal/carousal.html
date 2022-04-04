@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carousal</title>
+    <link rel="stylesheet" href="carousal.css">
+</head>
+<body>
+    <div id="carousal" class="carousal">
+        <button class="arrow prev">⇦</button>
+        <div class="gallery">
+            <ul>
+                <li><img src="C:\Users\UPASANA\Desktop\training\demos\1.png"></li>
+                <li><img src="C:\Users\UPASANA\Desktop\training\demos\2.png"></li>
+                <li><img src="C:\Users\UPASANA\Desktop\training\demos\3.png"></li>
+                <li><img src="C:\Users\UPASANA\Desktop\training\demos\4.png"></li>
+                <li><img src="C:\Users\UPASANA\Desktop\training\demos\5.png"></li>
+                <li><img src="C:\Users\UPASANA\Desktop\training\demos\6.png"></li>
+                <li><img src="C:\Users\UPASANA\Desktop\training\demos\7.png"></li>
+                <li><img src="C:\Users\UPASANA\Desktop\training\demos\8.png"></li>
+                <li><img src="C:\Users\UPASANA\Desktop\training\demos\9.png"></li>
+                <li><img src="C:\Users\UPASANA\Desktop\training\demos\10.png"></li>
+            </ul>
+        </div>
+        <button class="arrow next">⇨</button>
+    </div>
+
+    <script>
+        let i = 1;
+        for(let li of carousal.querySelectorAll('li')){
+            li.style.position = 'relative';
+            li.insertAdjacentHTML('beforeend',`<span style ="position:absolute;left:0;top:0">${i}</span>`);
+            i++;
+        }
+
+        let width = 130; 
+    let count = 3; 
+
+    let list = carousal.querySelector('ul');
+    let listElems = carousal.querySelectorAll('li');
+
+    let position = 0; 
+
+    carousal.querySelector('.prev').onclick = function() {
+      
+      position += width * count;
+      
+      position = Math.min(position, 0)
+      list.style.marginLeft = position + 'px';
+    };
+
+    carousal.querySelector('.next').onclick = function() {
+      
+      position -= width * count;
+      
+      position = Math.max(position, -width * (listElems.length - count));
+      list.style.marginLeft = position + 'px';
+    };
+
+    </script>
+</body>
+</html>
