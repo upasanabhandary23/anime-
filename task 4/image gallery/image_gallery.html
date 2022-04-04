@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <link rel="stylesheet" href="image_gallery.css">
+</head>
+<body>
+    <p><img id="largeImg" src="https://raw.githubusercontent.com/upasanabhandary23/anime-/main/task%204/image%20gallery/01.jpg" alt="Large image"></p>
+    <ul id="thumbs">
+        <li>
+          <a href="https://raw.githubusercontent.com/upasanabhandary23/anime-/main/task%204/image%20gallery/02.jpg" title="Image 2"><img src="https://raw.githubusercontent.com/upasanabhandary23/anime-/main/task%204/image%20gallery/02.jpg"></a>
+        </li>
+        <li>
+          <a href="https://raw.githubusercontent.com/upasanabhandary23/anime-/main/task%204/image%20gallery/03.jpg" title="Image 3"><img src="https://raw.githubusercontent.com/upasanabhandary23/anime-/main/task%204/image%20gallery/03.jpg"></a>
+        </li>
+        <li>
+          <a href="https://raw.githubusercontent.com/upasanabhandary23/anime-/main/task%204/image%20gallery/04.jpg" title="Image 4"><img src="https://raw.githubusercontent.com/upasanabhandary23/anime-/main/task%204/image%20gallery/04.jpg"></a>
+        </li>
+        <li>
+          <a href="https://raw.githubusercontent.com/upasanabhandary23/anime-/main/task%204/image%20gallery/05.jpg" title="Image 5"><img src="https://raw.githubusercontent.com/upasanabhandary23/anime-/main/task%204/image%20gallery/05.jpg"></a>
+        </li>
+        <li>
+          <a href="https://raw.githubusercontent.com/upasanabhandary23/anime-/main/task%204/image%20gallery/06.jpg" title="Image 6"><img src="https://raw.githubusercontent.com/upasanabhandary23/anime-/main/task%204/image%20gallery/06.jpg"></a>
+        </li>
+      </ul>
+
+      <script>
+          thumbs.onclick = function(event){
+              let thumbnail = event.target.closest('a');
+
+              if(! thumbnail) return ;
+              showThumbnail(thumbnail.href , thumbnail.title);
+              event.preventDefault();
+          }
+
+          function showThumbnail(href , title){
+              largeImg.src = href;
+              largeImg = title;
+          }
+      </script>
+</body>
+</html>
